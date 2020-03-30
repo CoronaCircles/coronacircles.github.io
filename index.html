@@ -51,7 +51,6 @@
   <!-- Page Content -->
   <div class="container">
 
-    <!-- Jumbotron Header -->
     <header class="jumbotron my-4">
       <h1 class="display-3">Corona Circles</h1>
       <p class="lead">
@@ -101,7 +100,6 @@ What is helpful?
       </p>
     </header>
     
-    <!-- Jumbotron Header -->
     <header class="jumbotron my-4">
       <h1 class="display-3">Host a Corona Circle</h1>
       <p class="lead">
@@ -127,64 +125,11 @@ What is helpful?
     </header>
 
     <header class="jumbotron my-4">
-    <h1 class="display-3">Join Event</h1>
-    <div class="row text-center">
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-60">
-          <div class="card-body">
-            <h4 class="card-title">Event Name</h4>
-            <p class="card-text">Language</p>
-            <p class="card-text">Free Seats: 3</p>
-          </div>
-          <div class="card-footer">
-            <button type="button" id="host-circle" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-s">Join</button>
-
-          </div>
-        </div>
-      </div>
-        <div class="col-lg-3 col-md-6 mb-4">
-          <div class="card h-60">
-            <div class="card-body">
-              <h4 class="card-title">Event Name</h4>
-              <p class="card-text">Language</p>
-              <p class="card-text">Free Seats: 2</p>
-            </div>
-            <div class="card-footer">
-              <button type="button" id="host-circle" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-s">Join</button>
+      <h1 class="display-3">Join Event</h1>
+      <div class="row text-center" id="events-row"></div>
+    </header>
   
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-4">
-          <div class="card h-60">
-            <div class="card-body">
-              <h4 class="card-title">Event Name</h4>
-              <p class="card-text">Language</p>
-              <p class="card-text">Free Seats: 1</p>
-            </div>
-            <div class="card-footer">
-              <button type="button" id="host-circle" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-s">Join</button>
-  
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-4">
-          <div class="card h-50">
-            <div class="card-body">
-              <h4 class="card-title">Event Name</h4>
-              <p class="card-text">Language</p>
-              <p class="card-text">Free Seats: 4</p>
-            </div>
-            <div class="card-footer">
-              <button type="button" id="host-circle" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-s">Join</button>
-  
-            </div>
-          </div>
-        </div>
-    </div>
-   </header>
-  <!-- /.container -->
-
+  </div><!-- /.container -->
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
@@ -193,10 +138,8 @@ What is helpful?
     <!-- /.container -->
   </footer>
 
-
-
-<!-- Extra large modal -->
-<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+<!-- Form to host a circle -->
+<div id="host-modal" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <form id="hostForm" name="host-form">
@@ -251,10 +194,18 @@ What is helpful?
             <input type="text" class="form-control" id="time_zone" placeholder="Time Zone">
           </div>
         </div>
-
+        
         <div class="form-group row">
           <div class="col-sm-10">
             <button type="submit" id="submit-host" class="btn btn-primary submit-host">Submit</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div id="host-msg-div" class="col-sm-12">
+            <button id="host-msg" type="button" class="d-none btn btn-secondary"></button>
           </div>
         </div>
       </form>
@@ -262,14 +213,27 @@ What is helpful?
   </div>
 </div>
 
-<div class="modal fade bd-example-modal-s" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+<!-- Form to register for event -->
+<div id="participant-modal" class="modal fade bd-example-modal-s" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
-      <form>
+      <form id="register-event">
         <div class="form-group row">
           <label for="formGroupExampleInput" class="col-sm-2 col-form-label">First Name</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="participant_first_name" placeholder="First Name">
+            <input type="text" class="form-control" id="participant-first-name" placeholder="First Name">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="formGroupExampleInput" class="col-sm-2 col-form-label">Last Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="participant-last-name" placeholder="Last Name">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="formGroupExampleInput" class="col-sm-2 col-form-label">Display Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="participant-display-name" placeholder="Display Name">
           </div>
         </div>
         <div class="form-group row">
@@ -279,11 +243,17 @@ What is helpful?
           </div>
         </div>
         <div class="form-group row">
-          <label for="inputEmail3" class="col-sm-12 col-form-label">By submitting this form, I agree to receive email address with the link to join the conversation!</label>
+          <label class="col-sm-12 col-form-label">By submitting this form, I agree to receive email address with the link to join the conversation!</label>
         </div>
         <div class="form-group row">
           <div class="col-sm-10">
-            <button type="button" class="btn btn-primary">Submit</button>
+            <button id="submit-participant" type="button" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <button id="participant-msg" type="button" class="d-none btn btn-secondary"></button>
           </div>
         </div>
       </form>
@@ -296,14 +266,6 @@ What is helpful?
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script type="text/javascript">
   $(document).ready(function() {
-    $('#host-circle').on('shown.bs.modal', function ($) {
-      // $('#myInput').trigger('focus')
-      
-    });
-
-    $('#join-circle').on('shown.bs.modal', function () {
-      // $('#myInput').trigger('focus')
-    });
   
     $('#submit-host').click(function(e){
       e.preventDefault();
@@ -312,36 +274,177 @@ What is helpful?
             first_name: $("#first_name").val(),
             last_name:$("#last_name").val(),
             display_name:$("#display_name").val(),
-            host_email:$("#host_email").val(),
+            email:$("#host_email").val(),
             circle_name:$("#circle_name").val(),
             circle_frequency:$("#circle_frequency option:selected").val(),
             time:$("#time").val(),
             time_zone:$("#time_zone").val()                
         });
+        // TODO: Send data to server
 
-        console.log((host));
-
-        // alert("Need to send the data! Closing now!");
-        // TODO: Send data to API  
-        // $('#target').html('Please wait sending..');
-
-        // $.ajax({
-        //     url: '/test/PersonSubmit',
-        //     type: 'post',
-        //     dataType: 'json',
-        //     contentType: 'application/json',
-        //     success: function (data) {
-        //         $('#target').html(data.msg);
-        //     },
-        //     data: JSON.stringify(person)
-        // });
-   
 
     });
 
-    
+    // Submit particpants data
+    $('#submit-host').click(function(e){
+      
+      e.preventDefault();
+      
+      var host = JSON.stringify({
+            first_name: $("#participants-first-name").val(),
+            last_name:$("#participants-last-name").val(),
+            display_name:$("#participants-display-name").val(),
+            email:$("#participants-email").val(),
+            event_id:$("#hidden-event-id").val()
+        });
+        
+        // This is just for demo
+        setTimeout(function() {
+          $('#submit-host').text("Sending...")
+        }, 1000);
+        setTimeout(function() {
+          $('#submit-host').attr('disabled', true);
+          $('#host-msg').removeClass('d-none').html('<b>Your circle has been created. Please check your email.</b>');
+        }, 3000);
+        setTimeout(function() {
+          $('#host-modal').modal('hide');
+          // $('#host-modal').modal('dispose');
+        }, 6000);
 
-  });// doc close
+         // TODO: Send data to server.
+    });
+
+  
+    // TODO: Need to fetch the event details from 
+    // backend.
+
+    // Example event details to mockup
+    var eventArray = [{
+      id : 1,
+      title : "test1",
+      date : "12/02/2012",
+      time : "12:10",
+      language : "German",
+      time_zone: "GMT",
+      seats : 1
+    },
+    {
+      id : 2,
+      title : "test2",
+      date : "12/02/2012",
+      time : "12:10",
+      time_zone: "CET",
+      language : "German",
+      seats : 1
+    }
+  ];
+  
+  // Add the Events to the HTML
+  for (var i = 0; i < eventArray.length; i++) {  
+    // main row wrapper
+    var divWrapper = document.createElement('div');
+    divWrapper.setAttribute('class', 'col-lg-3 col-md-6 mb-4');
+    var wrapperID = "wrapper-" + i;
+    divWrapper.setAttribute('id', wrapperID);  
+    document.getElementById('events-row').appendChild(divWrapper);
+    
+    // row
+    var divCard = document.createElement('div');
+    divCard.setAttribute('class', 'card h-60');
+    var divCardID = "card-" + i;
+    divCard.setAttribute('id', divCardID);
+    divWrapper.appendChild(divCard);
+
+    // populate body
+    var divCardBody = document.createElement('div');
+    divCardBody.setAttribute('class', 'card-body');
+    var cardBOdayID = "card-body-" + i; 
+    divCardBody.setAttribute('id', cardBOdayID);
+    divCard.appendChild(divCardBody);
+
+    var h4 = document.createElement('h4');
+    h4.textContent = eventArray[i].title;
+    h4.setAttribute('class', 'card-title');
+    divCardBody.appendChild(h4);
+
+    var pLang = document.createElement('p');
+    pLang.textContent = "Language: "+ eventArray[i].language;
+    pLang.setAttribute('class', 'card-text');
+    divCardBody.appendChild(pLang);
+
+    var pSeats = document.createElement('p');
+    pSeats.textContent = "Available Seats: " + eventArray[i].seats;
+    pSeats.setAttribute('class', 'card-text');
+    divCardBody.appendChild(pSeats);
+
+    var pSeats = document.createElement('p');
+    pSeats.textContent = "Date: " + eventArray[i].date;
+    pSeats.setAttribute('class', 'card-text');
+    divCardBody.appendChild(pSeats);
+
+    var pSeats = document.createElement('p');
+    pSeats.textContent = "Time: " + eventArray[i].time;
+    pSeats.setAttribute('class', 'card-text');
+    divCardBody.appendChild(pSeats);
+
+    var pSeats = document.createElement('p');
+    pSeats.textContent = "Time Zone: " + eventArray[i].time_zone;
+    pSeats.setAttribute('class', 'card-text');
+    divCardBody.appendChild(pSeats);
+
+    //populate footer
+    var divCardFooter= document.createElement('div');
+    divCardFooter.setAttribute('class', 'card-footer');
+    var divCardFooterID = "cards-footer-" + i;
+    divCardFooter.setAttribute('id', divCardFooterID);
+    divCard.appendChild(divCardFooter);
+  
+    var joinEventBtn = document.createElement('button');
+    joinEventBtn.textContent = "Join";
+    joinEventBtn.setAttribute('id', 'join-' + eventArray[i].id);
+    joinEventBtn.setAttribute('class', 'btn btn-primary join-event');
+    joinEventBtn.setAttribute('data-toggle','modal'); 
+    joinEventBtn.setAttribute('data-target','.bd-example-modal-s');
+    joinEventBtn.setAttribute('data-id', eventArray[i].id);
+    divCardFooter.appendChild(joinEventBtn);
+    
+  }
+
+  // Add Event ID to the form.
+  $('.join-event').click(function () {
+   
+    if (document.contains(document.getElementById("hidden-event-id"))) {
+        document.getElementById("hidden-event-id").remove();
+    } 
+    
+    $('<input>').attr({
+      type: 'hidden',
+      id: 'hidden-event-id',
+      name: 'event_id',
+      value: $(this).attr('data-id')
+    }).appendTo('#register-event');
+  });
+
+
+  $('#submit-participant').click(function(e){
+    e.preventDefault();
+    setTimeout(function() {
+          $('#submit-participant').attr('disabled', true).text("Sending...");
+        }, 1000);
+    setTimeout(function() {
+          $('#join-1').attr("disabled", true);
+          $('#participant-msg').removeClass('d-none').html('<b>You have been registered. Please check your email.</b>');
+        }, 3000);
+    setTimeout(function() {
+          $('#participant-modal').modal('hide');
+          $('#submit-participant').removeAttr('disabled').text("Send");
+          $('#participant-msg').addClass('d-none');
+          // $('#host-modal').modal('dispose');
+        }, 6000);
+  });
+      
+
+});// doc close
 
   
   </script>
